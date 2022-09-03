@@ -1,17 +1,17 @@
 import React from 'react'
- 
+
 const Formulario = () => {
-    const [nombre,setNombre]=React.useState('')
-    const [apellido,setApellido]=React.useState('')
-    const [lista,setLista]=React.useState([])
-    const guardarDatos=(e)=>{
+    const [nombre, setNombre] = React.useState('')
+    const [apellido, setApellido] = React.useState('')
+    const [lista, setLista] = React.useState([])
+    const guardarDatos = (e) => {
         e.preventDefault()//prevenir el comportamiento del metodo get
         //validaciones
-        if(!nombre.trim()){
+        if (!nombre.trim()) {
             alert('Ingrese el Nombre')
             return
         }
-        if(!apellido.trim()){
+        if (!apellido.trim()) {
             alert('Ingrese el Apellido')
             return
         }
@@ -19,23 +19,21 @@ const Formulario = () => {
         setLista(
             [
                 ...lista,
-                {nombre:nombre,apellido:apellido}
+                { nombre: nombre, apellido: apellido }
             ]
         )
-        //limpiar estados
         setNombre('')
         setApellido('')
-        //limpiar inputs
         e.target.reset()
- 
+
     }
-    const eliminar=(id)=>{
-    const listaFiltrada=lista.filter((elemento)=>elemento.id!==id)
-    setLista(listaFiltrada)
-  }
-  return (
-    <div>
-        <hr />
+    const eliminar = (id) => {
+        const listaFiltrada = lista.filter((elemento) => elemento.id !== id)
+        setLista(listaFiltrada)
+    }
+    return (
+        <div>
+            <hr />
         <h2>Formulario de Registro</h2>
         <form onSubmit={guardarDatos}>
             <input type="text" 
@@ -52,17 +50,20 @@ const Formulario = () => {
                 <button type='submit' className='m-3 btn btn-outline-info'>Registrar</button>
             </div>
         </form>
-        <hr />
         <h2>Lista de usuarios</h2>
-        <ul>
+        <ul className="list-group">
             {
-                lista.map((item,index)=>(<li key={index}>{item.nombre} {item.apellido}</li>))
-                <button className="btn btn-danger float-end mx-2"onClick={()=>eliminar(elemento.id)}>Eliminar</button>
+              lista.map((elemento) => (
+                <li key={elemento.id} className="list-group-item">
+                  {elemento.nombre} {elemento.apellido}
+                  <button className="btn btn-danger float-end mx-2"
+                    onClick={() => eliminar(elemento.id)}>Eliminar</button>
+                </li>
+              ))
             }
-        </ul>
-        <hr />
-    </div>
+          </ul>
+    </div >
   )
 }
- 
+
 export default Formulario
