@@ -29,6 +29,10 @@ const Formulario = () => {
         e.target.reset()
  
     }
+    const eliminar=(id)=>{
+    const listaFiltrada=lista.filter((elemento)=>elemento.id!==id)
+    setLista(listaFiltrada)
+  }
   return (
     <div>
         <hr />
@@ -53,6 +57,7 @@ const Formulario = () => {
         <ul>
             {
                 lista.map((item,index)=>(<li key={index}>{item.nombre} {item.apellido}</li>))
+                <button className="btn btn-danger float-end mx-2"onClick={()=>eliminar(elemento.id)}>Eliminar</button>
             }
         </ul>
         <hr />
